@@ -1,0 +1,153 @@
+/***********Bijendra Sahu***************/
+/////////*Contacts*///////////////
+create_contact(Post Method Only use http://18.188.188.62/Trippy/create_contact)
+http://18.188.188.62/Trippy/create_contact?mobile=9876543210&contactname=cdas&status=asd&profile_img=file
+
+updatecontact(Post Method Only use http://18.188.188.62/Trippy/updatecontact)
+http://18.188.188.62/Trippy/updatecontact?id=2&contactname=asdfca&profile_img=file
+
+get_all_contacts
+http://18.188.188.62/Trippy/get_all_contacts
+
+get_contact_by_mobile
+http://18.188.188.62/Trippy/get_contact_by_mobile?mobile=9876543210
+
+deletecontact
+http://18.188.188.62/Trippy/deletecontact?id=2
+
+resendotp
+http://18.188.188.62/Trippy/resendotp?mobile=9876543210
+
+
+searchuser
+http://18.188.188.62/Trippy/searchuser?search_name=abc
+/////////*Contacts*///////////////
+
+
+/////////*Location*///////////////
+Create:
+http://18.188.188.62/Trippy/create_location?ln=abc&addr=jbp&lat=3534&lon=454554&contactid=1
+
+Update
+http://18.188.188.62/Trippy/updatelocation?id=2&ln=abc&addr=jbp&lat=3534&lon=454554&contactid=1
+
+Delete
+http://18.188.188.62/Trippy/deletelocation?id=2
+
+getlocation_byid
+http://18.188.188.62/Trippy/getlocation_byid?id=2
+
+getlocation_bycontactid
+http://18.188.188.62/Trippy/getlocation_bycontactid?contactid=2
+/////////*Location*///////////////
+
+
+/////////*Friends*///////////////
+check friend
+http://18.188.188.62/Trippy/checkrequest?friendid=1&contactid=2
+
+Send Request:
+http://18.188.188.62/Trippy/sendrequest?friendid=1&contactid=2
+
+Cancel Request:
+http://18.188.188.62/Trippy/cancelrequest?friendid=1&contactid=2
+
+Accept Request:
+http://18.188.188.62/Trippy/acceptrequest?contactid=1&friendid=2
+
+Request List:
+http://18.188.188.62/Trippy/requestlist?contactid=1
+
+getfriends_bycontactid
+http://18.188.188.62/Trippy/getfriends?contactid=1
+
+block friend
+http://18.188.188.62/Trippy/block?friendid=2
+
+getblockedfriends
+http://18.188.188.62/Trippy/getblockedfriends?contactid=2
+
+unfriend
+http://18.188.188.62/Trippy/unfriend?contactid=2&friendid=1
+/////////*Friends*///////////////
+
+
+/////////*Trips*///////////////
+Create:
+http://18.188.188.62/Trippy/create_trips?tripname=abc&contactid=2&tripdate=2018-07-19&triptime=11:00&tripstatus=cdas&tripnotes=dsah&locationid=1
+
+Update:
+http://18.188.188.62/Trippy/updatetrips?id=1&tripname=abc&contactid=2&tripdate=2018-07-19&triptime=11:00&tripstatus=cdas&tripnotes=dsah&locationid=1
+
+getalltrips
+http://18.188.188.62/Trippy/getalltrips
+
+get_my_trip
+http://18.188.188.62/Trippy/get_my_trip?contactid=2
+
+deletetrips
+http://18.188.188.62/Trippy/deletetrips?id=2
+
+gettrips_byid
+http://18.188.188.62/Trippy/gettrips_byid?id=2
+/////////*Trips*///////////////
+
+
+/////////*Trips Members*///////////////
+create_tripmembers:
+http://18.188.188.62/Trippy/create_tripmembers?tripid=1&adminid=2&contactid=1&tripstatus=dsa
+
+get_tripfriends:
+http://18.188.188.62/Trippy/get_tripfriends?tripid=1
+
+deletetripmembers
+http://18.188.188.62/Trippy/deletetripmembers?contactid=1
+/////////*Trips Members*///////////////
+
+
+/////////*Trip Post*///////////////
+create_trip_post(Post Method Only use http://18.188.188.62/Trippy/create_trip_post)
+http://18.188.188.62/Trippy/create_trip_post?title=das&description=cdas&trip_id=1&post_by=1&post_img=file
+
+updatetrip_post(Post Method Only use http://18.188.188.62/Trippy/updatecontact)
+http://18.188.188.62/Trippy/updatetrip_post?post_id=1&title=cdas&post_img=file
+
+get_Alltrip_posts
+http://18.188.188.62/Trippy/get_Alltrip_posts?user_id=1
+
+share_post
+http://18.188.188.62/Trippy/share_trip_post?post_id=75&user_id=1
+
+edit_trip_post
+http://18.188.188.62/Trippy/edit_trip_post?post_id=75&visible_till=48
+
+
+get_trip_post_by_trip_id
+http://18.188.188.62/Trippy/get_trip_post_by_trip_id?trip_id=1
+
+get_hidetrip_post_by_userid
+http://18.188.188.62/Trippy/get_hidetrip_post_by_userid?user_id=1
+
+hide_unhide_trip_post
+http://18.188.188.62/Trippy/hide_unhide_trip_post?trip_post_id=1
+
+
+get_trip_post_by_userid
+http://18.188.188.62/Trippy/get_trip_post_by_userid?user_id=1
+
+deletetrip_post
+http://18.188.188.62/Trippy/deletetrip_post?id=1
+
+create_trip_post_tag
+http://18.188.188.62/Trippy/create_trip_post_tag?trip_post_id=1&tagid=1
+
+deletetrip_posttag
+http://18.188.188.62/Trippy/deletetrip_posttag?id=1
+
+post like
+http://18.188.188.62/Trippy/post_like?post_id=1&user_id=1
+
+post comment
+http://18.188.188.62/Trippy/post_comment?post_id=1&user_id=1&description=dasd
+/////////*Trip Post*///////////////
+/***********Bijendra Sahu***************/

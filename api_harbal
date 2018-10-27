@@ -1,0 +1,66 @@
+/*----------------------------Bijendra Sahu---------------------------------*/
+Registration or login
+http://18.188.188.62/harbal/getregister?contact=8989892897
+
+Verify Contact
+http://18.188.188.62/harbal/verify_otp?otp=123456
+
+Resend Otp
+http://18.188.188.62/harbal/resend_otp?contact=8989892897
+
+View Ads
+http://18.188.188.62/harbal/getAllAds
+
+Check Referral Code
+http://18.188.188.62/harbal/checkrc?rc=rc5731839
+
+Profile Update(Post method)
+http://18.188.188.62/harbal/edit_profile?user_id=1&paytm_no=9876543210&address=abc&profile_img=base64
+
+My Referral
+http://18.188.188.62/harbal/getMyReferral?user_id=1
+
+view_share_ads_by_user
+http://18.188.188.62/harbal/view_share_ads_by_user?user_id=1&ad_id=1&action=view     //action=view/share
+
+get_user_point
+http://18.188.188.62/harbal/get_user_point?user_id=1
+
+redeem_now
+http://18.188.188.62/harbal/redeem_now?user_id=1
+
+redeem_history
+http://18.188.188.62/harbal/redeem_history?user_id=1
+
+
+Bank
+http://18.188.188.62/harbal/add_update_bank_details?user_id=1&ac_holder=bijendra&ac_no=564564&bank=sbi&ifsc=ifsc123&pan=JHSKLDH
+
+User record by id
+http://18.188.188.62/harbal/getUserRecord?user_id=1
+
+
+Today Ads Visible Count
+http://18.188.188.62/harbal/getAdsCounts?user_id=1
+
+Bank Details
+http://18.188.188.62/harbal/getBankDetails
+
+Ads Points
+http://18.188.188.62/harbal/getAdsPoints
+
+All News
+http://18.188.188.62/harbal/getAllNews
+
+All Gallery
+http://18.188.188.62/harbal/getAllGallery
+
+/*----------------------------Bijendra Sahu---------------------------------*/
+
+ALTER TABLE `advertisement` CHANGE `video` `file_type` ENUM('img','video','text') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT 'img';
+
+ALTER TABLE `advertisement` CHANGE `banner` `file_path` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL;
+
+ALTER TABLE `advertisement` ADD `view_points` FLOAT NULL DEFAULT '0' AFTER `text`;
+
+  //18_10
