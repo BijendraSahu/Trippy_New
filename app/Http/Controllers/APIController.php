@@ -60,16 +60,19 @@ class APIController extends Controller
         $validator = Validator::make($input, [
             'mobile' => 'required',
             'contactname' => 'required',
+            'token' => 'required',
 //            'status' => 'required',
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
+        $token = request('token');
         $contacts = new Contacts();
         $contacts->mobile = request('mobile');
         $contacts->contactname = request('contactname');
 //        $contacts->contactstatus = request('status');
+        $contacts->token = request('token');
         $file = $request->file('profile_img');
         if (request('profile_img') != null) {
             $data = request('profile_img');
@@ -83,6 +86,11 @@ class APIController extends Controller
         }
         $contacts->save();
         $contact = Contacts::find($contacts->id);
+        $title = "Welcome again to Trippy";
+        $message = "Thanks for joining us";
+        if (request('token') != null) {
+            UserNotifications::getNotification($token, $title, $message, []);
+        }
         return $this->sendResponse($contact, 'Contacts has been saved');
     }////////////profile_img+
 
@@ -94,6 +102,7 @@ class APIController extends Controller
         $validator = Validator::make($input, [
             'google_fb_id' => 'required',
             'contactname' => 'required',
+            'token' => 'required',
 //            'status' => 'required',
         ]);
 
@@ -120,6 +129,12 @@ class APIController extends Controller
                 $contacts->imageurl = $path;
             }
             $contacts->save();
+            $title = "Welcome again to Trippy";
+            $message = "Thanks for joining us";
+            $token = request('token');
+            if (request('token') != null) {
+                UserNotifications::getNotification($token, $title, $message, []);
+            }
             $fbcontact = Contacts::find($contacts->id);
             return $this->sendResponse($fbcontact, 'Contacts has been saved');
         }
@@ -1214,6 +1229,24 @@ class APIController extends Controller
             $pl->user_id = $user_id;
             $pl->save();
             return $this->sendResponse([], 'You like a post');
+            $post = TripPost::find(request('post_id'));
+            $user_post_by = Contacts::find($post->post_by);
+            if (isset($user_post_by->token) && request('user_id') != $post->post_by) {
+                $comment_by = ucwords($user->contactname);
+                $title = "Post Liked";
+                $message = "$comment_by is liked your post";
+                $token = $user_post_by->token;
+                $data = $post;
+                $user_notification = new UserNotifications();
+                $user_notification->post_id = request('post_id');
+                $user_notification->user_id = $post->post_by;
+                $user_notification->notified_by = $user->id;
+                $user_notification->description = "<b>$comment_by</b> is liked your post";
+                $user_notification->created_at = Carbon::now('Asia/Kolkata');
+                $user_notification->save();
+//                event(new StatusLiked($post->post_by));
+                UserNotifications::getNotification($token, $title, $message, $data);
+            }
         } else {
             $postunlike->delete();
             return $this->sendResponse([], 'You unlike a post');

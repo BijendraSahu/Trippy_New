@@ -1,66 +1,42 @@
-/*----------------------------Bijendra Sahu---------------------------------*/
-Registration or login
-http://18.188.188.62/harbal/getregister?contact=8989892897
+<========Trippy Api=========>
+1. Login with google - google_id,name,email,image
+2. Login with facebook - same
+3. Particular Post Privacy - http://18.188.188.62/Trippy/setpostprivacy?post_id=1&privacy=friend
+4. Edit trip Address - edit trip api
+5. Edit Trip Location - edit trip api
+6. Edit Trip name - edit trip api - http://18.188.188.62/Trippy/updatetrips?trip_id=1&tripname=dcsa&contactid=2&tripdate=2018-10-27&triptime=17:20:00&tripstatus=Done&tripnotes=lnlan&friend_id=1,2
+7. Edit trip Friends - edit trip api
+8. Search user by name or number - api--
+9. Notification List - co
+10. Post according Post id - co
+11. Remove Notification - co
+12. mark read Notification - co
+13. Trip Tag Member : Show post timeline---
 
-Verify Contact
-http://18.188.188.62/harbal/verify_otp?otp=123456
+Mark as Read Notification
+http://18.188.188.62/Trippy/make_as_read_noti?notification_id=1
 
-Resend Otp
-http://18.188.188.62/harbal/resend_otp?contact=8989892897
+Remove Notification
+http://18.188.188.62/Trippy/remove_noti?notification_id=1
 
-View Ads
-http://18.188.188.62/harbal/getAllAds
+User Notification
+http://18.188.188.62/Trippy/getusernotification?user_id=1
 
-Check Referral Code
-http://18.188.188.62/harbal/checkrc?rc=rc5731839
+get_trip_post_by_trip_post_id
+http://18.188.188.62/Trippy/get_trip_post_by_trip_post_id?trip_post_id_id=1
 
-Profile Update(Post method)
-http://18.188.188.62/harbal/edit_profile?user_id=1&paytm_no=9876543210&address=abc&profile_img=base64
-
-My Referral
-http://18.188.188.62/harbal/getMyReferral?user_id=1
-
-view_share_ads_by_user
-http://18.188.188.62/harbal/view_share_ads_by_user?user_id=1&ad_id=1&action=view     //action=view/share
-
-get_user_point
-http://18.188.188.62/harbal/get_user_point?user_id=1
-
-redeem_now
-http://18.188.188.62/harbal/redeem_now?user_id=1
-
-redeem_history
-http://18.188.188.62/harbal/redeem_history?user_id=1
+searchuser
+http://18.188.188.62/Trippy/searchuser?search_name=am  // search_name=amit or 9876543212
 
 
-Bank
-http://18.188.188.62/harbal/add_update_bank_details?user_id=1&ac_holder=bijendra&ac_no=564564&bank=sbi&ifsc=ifsc123&pan=JHSKLDH
-
-User record by id
-http://18.188.188.62/harbal/getUserRecord?user_id=1
+google_fb_id  ///post method  base 64 image as on 'create_contact' api
+http://18.188.188.62/Trippy/google_fb_login?google_fb_id=fvzxdgfh&contactname=dasfas&profile_img=base64
 
 
-Today Ads Visible Count
-http://18.188.188.62/harbal/getAdsCounts?user_id=1
-
-Bank Details
-http://18.188.188.62/harbal/getBankDetails
-
-Ads Points
-http://18.188.188.62/harbal/getAdsPoints
-
-All News
-http://18.188.188.62/harbal/getAllNews
-
-All Gallery
-http://18.188.188.62/harbal/getAllGallery
-
-/*----------------------------Bijendra Sahu---------------------------------*/
-
-ALTER TABLE `advertisement` CHANGE `video` `file_type` ENUM('img','video','text') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT 'img';
-
-ALTER TABLE `advertisement` CHANGE `banner` `file_path` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL;
-
-ALTER TABLE `advertisement` ADD `view_points` FLOAT NULL DEFAULT '0' AFTER `text`;
-
-  //18_10
+<========Trippy Api=========>
+ALTER TABLE `locations` CHANGE `loc_name` `loc_name` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL;
+ALTER TABLE `locations` CHANGE `address` `address` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL;
+ALTER TABLE `locations` CHANGE `lat` `lat` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL;
+ALTER TABLE `locations` CHANGE `lon` `lon` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL;
+ALTER TABLE `contacts` ADD `google_fb_id` VARCHAR(100) NULL DEFAULT NULL AFTER `id`;
+ALTER TABLE `contacts` ADD `token` VARCHAR(250) NULL DEFAULT NULL AFTER `google_fb_id`;
