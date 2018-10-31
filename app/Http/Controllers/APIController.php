@@ -117,6 +117,7 @@ class APIController extends Controller
 //            $contacts->mobile = request('mobile');
             $contacts->google_fb_id = request('google_fb_id');
             $contacts->contactname = request('contactname');
+            $contacts->token = request('token');
             $file = $request->file('profile_img');
             if (request('profile_img') != null) {
                 $data = request('profile_img');
@@ -1228,7 +1229,7 @@ class APIController extends Controller
             $pl->post_id = $post_id;
             $pl->user_id = $user_id;
             $pl->save();
-            return $this->sendResponse([], 'You like a post');
+            $user = Contacts::find(request('user_id'));
             $post = TripPost::find(request('post_id'));
             $user_post_by = Contacts::find($post->post_by);
             if (isset($user_post_by->token) && request('user_id') != $post->post_by) {
@@ -1247,6 +1248,7 @@ class APIController extends Controller
 //                event(new StatusLiked($post->post_by));
                 UserNotifications::getNotification($token, $title, $message, $data);
             }
+            return $this->sendResponse([], 'You like a post');
         } else {
             $postunlike->delete();
             return $this->sendResponse([], 'You unlike a post');
@@ -1275,6 +1277,25 @@ class APIController extends Controller
         $pl->description = $description;
         $pl->user_id = $user_id;
         $pl->save();
+        $user = Contacts::find(request('user_id'));
+        $post = TripPost::find(request('post_id'));
+        $user_post_by = Contacts::find($post->post_by);
+        if (isset($user_post_by->token) && request('user_id') != $post->post_by) {
+            $comment_by = ucwords($user->contactname);
+            $title = "Post Comment";
+            $message = "$comment_by is commented on your post";
+            $token = $user_post_by->token;
+            $data = $post;
+            $user_notification = new UserNotifications();
+            $user_notification->post_id = request('post_id');
+            $user_notification->user_id = $post->post_by;
+            $user_notification->notified_by = $user->id;
+            $user_notification->description = "<b>$comment_by</b> is commented on your post";
+            $user_notification->created_at = Carbon::now('Asia/Kolkata');
+            $user_notification->save();
+//                event(new StatusLiked($post->post_by));
+            UserNotifications::getNotification($token, $title, $message, $data);
+        }
         return $this->sendResponse($pl, 'Comment has been saved');
     }
 
@@ -1402,6 +1423,24 @@ class APIController extends Controller
         $friends->status = 'Pending';
         $friends->save();
         return $this->sendResponse($friends, 'Friend Request has been sent');
+        $user = Contacts::find(request('contactid'));
+        $post = Contacts::find(request('friendid'));
+        if (isset($post->token) && request('friendid') != $post->id) {
+            $comment_by = ucwords($user->contactname);
+            $title = "Request Received";
+            $message = "$comment_by is sent you an friend request";
+            $token = $post->token;
+            $data = $post;
+            $user_notification = new UserNotifications();
+//            $user_notification->post_id = request('post_id');
+            $user_notification->user_id = request('friendid');
+            $user_notification->notified_by = request('contactid');
+            $user_notification->description = "<b>$comment_by</b> is sent you an friend request";
+            $user_notification->created_at = Carbon::now('Asia/Kolkata');
+            $user_notification->save();
+//                event(new StatusLiked($post->post_by));
+            UserNotifications::getNotification($token, $title, $message, $data);
+        }
     }
 
     public
@@ -1444,6 +1483,25 @@ class APIController extends Controller
             $friend->status = 'friends';
             $friend->save();
             return $this->sendResponse($friend, 'Request has been accepted');
+
+            $user = Contacts::find(request('friendid'));
+            $post = Contacts::find(request('contactid'));
+            if (isset($user->token) && request('friendid') != $user->id) {
+                $comment_by = ucwords($post->contactname);
+                $title = "Request Accepted";
+                $message = "$comment_by has been accepted your request";
+                $token = $user->token;
+                $data = $post;
+                $user_notification = new UserNotifications();
+//                $user_notification->post_id = request('post_id');
+                $user_notification->user_id = request('friendid');
+                $user_notification->notified_by = request('contactid');
+                $user_notification->description = "<b>$comment_by</b> has been accepted your request";
+                $user_notification->created_at = Carbon::now('Asia/Kolkata');
+                $user_notification->save();
+//                event(new StatusLiked($post->post_by));
+                UserNotifications::getNotification($token, $title, $message, $data);
+            }
         } else {
             return $this->sendError('No record available', '');
         }
